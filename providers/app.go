@@ -2,7 +2,9 @@ package providers
 
 import (
 	"github.com/gin-gonic/gin"
+	"os"
 	"transfer_money/app/routes"
+	"transfer_money/helpers"
 )
 
 func Run() {
@@ -10,5 +12,6 @@ func Run() {
 
 	routes.TransferRoutes(r)
 
-	r.Run()
+	err := r.Run(":" + os.Getenv("APP_PORT_LOCAL"))
+	helpers.CheckError(err)
 }
